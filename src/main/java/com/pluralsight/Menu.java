@@ -2,10 +2,12 @@ package com.pluralsight;
 
 public class Menu {
 
-    public static String displayMenu(String nextMenu) {
+    public static String menuToDisplay = "home";
+
+    public void displayNextMenu() {
 
     }
 
-    public static String loadMenuInfo()
 
-}
+
+}// closes Menu class
