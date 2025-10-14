@@ -33,7 +33,7 @@ public class ConsoleHelper {
     }
 
     public static void consoleClear() {
-        System.out.print("\033\143");
+        System.out.print("\033\143" + "\n");
     }
 
 }

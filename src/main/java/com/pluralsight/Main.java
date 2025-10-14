@@ -2,16 +2,14 @@ package com.pluralsight;
 
 
 public class Main {
+
+    public static boolean run = true;
+
     public static void main(String[] args) {
-
-        boolean run = true;
-
 
 
         while (run) {
-
-            Menu.displayNextMenu();
-
+            Menu.displayMenu(Menu.menuToDisplay);
         }
 
 
