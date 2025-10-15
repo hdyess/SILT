@@ -2,7 +2,9 @@ package com.pluralsight;
 
 import java.io.BufferedWriter;
 import java.io.Console;
+import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.ArrayList;
 
 public class Menu {
 
@@ -45,15 +47,21 @@ public class Menu {
                 |             Deposits            |
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
 
-        String depositNote = ConsoleHelper.promptForString("Add a note to your deposit:");
-        String depositSender = ConsoleHelper.promptForString("Deposit sender:");
-        String depositAmount = ConsoleHelper.promptForString("Deposit amount:");
+        try {
+            String depositNote = ConsoleHelper.promptForString("Add a note to your deposit:");
+            String depositSender = ConsoleHelper.promptForString("Deposit sender:");
+            String depositAmount = ConsoleHelper.promptForString("Deposit amount:");
 
-        ConsoleHelper.csvReportWrite(depositNote, depositSender, depositAmount);
 
-        ConsoleHelper.promptForString("Press enter to continue");
-        menuToDisplay = "reports";
+            ConsoleHelper.csvReportWrite(depositNote, depositSender, depositAmount);
+            ConsoleHelper.promptForString("Your deposit has been recorded, press enter to continue");
+            menuToDisplay = "home";
 
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("There was an error with your deposit, and it was not recorded. Please try again");
+            menuToDisplay = "deposit";
+        }
     }
 
     public static void payment() {
@@ -62,8 +70,21 @@ public class Menu {
                 |             Payments            |
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
 
-        ConsoleHelper.promptForString("Press enter to continue.");
-        menuToDisplay = "home";
+        try {
+            String paymentNote = ConsoleHelper.promptForString("Add a note to your payment:");
+            String paymentSender = ConsoleHelper.promptForString("Payment to:");
+            String paymentAmount = ("-" + ConsoleHelper.promptForString("Payment amount:"));
+
+            ConsoleHelper.csvReportWrite(paymentNote, paymentSender, paymentAmount);
+            ConsoleHelper.promptForString("Your payment has been recorded, press enter to continue");
+            menuToDisplay = "home";
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("There was an error with your deposit, and it was not recorded. Please try again");
+            menuToDisplay = "payment";
+        }
+
     }
 
     public static void reports() {
@@ -100,7 +121,32 @@ public class Menu {
         }
     }
 
-    // screens under reporting
+    // screens under reporting menu
+
+    public static void allReports() {
+        System.out.println("""
+                 _________________________________
+                |           All Reports           |
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+
+        try {
+
+            ArrayList<transaction>
+
+            FileReader fileReader = new FileReader("reports.csv");
+
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
+            menuToDisplay = "home";
+        }
+
+
+
+        ConsoleHelper.promptForString("Press enter to continue.");
+        menuToDisplay = "home";
+    }
 
     public static void monthToDate() {
         System.out.println("""

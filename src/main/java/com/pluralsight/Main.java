@@ -10,6 +10,7 @@ public class Main {
         while (run) {
             Menu.displayMenu(Menu.menuToDisplay);
         }
-
+        
     }// closes main method
+
 }// closes Main class
