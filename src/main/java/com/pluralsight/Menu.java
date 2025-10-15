@@ -1,16 +1,29 @@
 package com.pluralsight;
 
-import java.io.BufferedWriter;
-import java.io.Console;
+import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Menu {
 
+    private static final ArrayList<Transaction> transactionsArrayList = new ArrayList<Transaction>();
     public static String menuToDisplay = "home";
 
+    public static void initTransactions() {
+
+
+        try {
+            FileReader fileReader = new FileReader("reports.csv");
+            BufferedReader buffReader = new BufferedReader(fileReader);
+            
+
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+
+    }
 
     // screens
 
@@ -137,8 +150,6 @@ public class Menu {
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
 
         try {
-
-            FileReader fileReader = new FileReader("reports.csv");
 
 
         } catch (Exception ex) {
