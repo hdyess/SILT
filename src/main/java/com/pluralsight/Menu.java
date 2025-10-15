@@ -4,11 +4,13 @@ import java.io.BufferedWriter;
 import java.io.Console;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Menu {
 
     public static String menuToDisplay = "home";
+
 
     // screens
 
@@ -92,6 +94,7 @@ public class Menu {
                  _________________________________
                 |            Reporting            |
                 |                                 |
+                | A ----------------- All Reports |
                 | M --------------- Month to Date |
                 | PM ------------- Previous Month |
                 | Y ---------------- Year to Date |
@@ -100,6 +103,9 @@ public class Menu {
                 | Q ---------------------- Return |
                 |_________________________________|""");
         switch (ConsoleHelper.promptForString("What would you like to do?").toLowerCase()) {
+            case "a":
+                menuToDisplay = "allReports";
+                break;
             case "m":
                 menuToDisplay = "monthToDate";
                 break;
@@ -121,6 +127,7 @@ public class Menu {
         }
     }
 
+
     // screens under reporting menu
 
     public static void allReports() {
@@ -130,8 +137,6 @@ public class Menu {
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
 
         try {
-
-            ArrayList<transaction>
 
             FileReader fileReader = new FileReader("reports.csv");
 
@@ -226,8 +231,14 @@ public class Menu {
             case "yearToDate":
                 yearToDate();
                 break;
+            case "yearPrevious":
+                yearPrevious();
+                break;
             case "vendor":
                 vendor();
+                break;
+            case "allReports":
+                allReports();
                 break;
             default:
                 home();
@@ -236,6 +247,5 @@ public class Menu {
 
     } // closes displayMenu
 
-
-
 }// closes Menu class
+
