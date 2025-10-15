@@ -9,14 +9,20 @@ public class Menu {
     private static final ArrayList<Transaction> transactionsArrayList = new ArrayList<Transaction>();
     public static String menuToDisplay = "home";
 
+    // loads the transactions array list with all the transactions from the csv
     public static void initTransactions() {
 
 
         try {
             FileReader fileReader = new FileReader("reports.csv");
             BufferedReader buffReader = new BufferedReader(fileReader);
-            
 
+            String csvLine;
+            while ((csvLine = buffReader.readLine()) != null) {
+                String csvLineArray[] = csvLine.split("\\|");
+                transactionsArrayList.add(new Transaction(csvLineArray[0], csvLineArray[1], csvLineArray[2], csvLineArray[3], Float.parseFloat(csvLineArray[4])));
+
+            }
 
         } catch (Exception ex) {
             System.out.println(ex);
@@ -103,6 +109,7 @@ public class Menu {
     }
 
     public static void reports() {
+
         System.out.println("""
                  _________________________________
                 |            Reporting            |
@@ -150,12 +157,15 @@ public class Menu {
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
 
         try {
+            for(Transaction t : transactionsArrayList) {
+                System.out.println(t);
 
+            }
 
         } catch (Exception ex) {
             System.out.println(ex);
             System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
-            menuToDisplay = "home";
+            menuToDisplay = "reports";
         }
 
 
