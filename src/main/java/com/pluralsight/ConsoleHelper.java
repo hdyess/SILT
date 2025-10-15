@@ -1,6 +1,11 @@
 package com.pluralsight;
 
+import java.io.FileWriter;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Scanner;
+
+import static java.awt.Color.PINK;
 
 public class ConsoleHelper {
 
@@ -36,4 +41,21 @@ public class ConsoleHelper {
         System.out.print("\033\143" + "\n");
     }
 
+    public static void csvReportWrite(String note, String agent, String amount) {
+
+        try {
+
+            FileWriter fileWriter = new FileWriter("reports.csv", true);
+
+            fileWriter.write(("\n" + LocalDate.now() + "|" + LocalTime.now() + "|" + note + "|" + agent + "|" + amount));
+
+            fileWriter.close();
+
+
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
+
+
+    }
 }

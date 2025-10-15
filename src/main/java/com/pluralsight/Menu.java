@@ -1,8 +1,14 @@
 package com.pluralsight;
 
+import java.io.BufferedWriter;
+import java.io.Console;
+import java.io.FileWriter;
+
 public class Menu {
 
     public static String menuToDisplay = "home";
+
+    // screens
 
     public static void home() {
         System.out.println("""
@@ -37,34 +43,27 @@ public class Menu {
         System.out.println("""
                  _________________________________
                 |             Deposits            |
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ """);
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
 
+        String depositNote = ConsoleHelper.promptForString("Add a note to your deposit:");
+        String depositSender = ConsoleHelper.promptForString("Deposit sender:");
+        String depositAmount = ConsoleHelper.promptForString("Deposit amount:");
 
+        ConsoleHelper.csvReportWrite(depositNote, depositSender, depositAmount);
+
+        ConsoleHelper.promptForString("Press enter to continue");
+        menuToDisplay = "reports";
+
+    }
+
+    public static void payment() {
+        System.out.println("""
+                 _________________________________
+                |             Payments            |
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+
+        ConsoleHelper.promptForString("Press enter to continue.");
         menuToDisplay = "home";
-    }
-
-    public static void withdrawal() {
-        System.out.println("withdrawal menu");
-    }
-
-    public static void monthToDate() {
-        System.out.println("month to date menu");
-    }
-
-    public static void monthPrevious() {
-        System.out.println("month previous menu");
-    }
-
-    public static void yearToDate() {
-        System.out.println("year to date menu");
-    }
-
-    public static void yearPrevious() {
-        System.out.println("year previous menu");
-    }
-
-    public static void vendor() {
-        System.out.println("vendor search menu");
     }
 
     public static void reports() {
@@ -101,11 +100,64 @@ public class Menu {
         }
     }
 
+    // screens under reporting
+
+    public static void monthToDate() {
+        System.out.println("""
+                 _________________________________
+                |            MTD Report           |
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+
+        ConsoleHelper.promptForString("Press enter to continue.");
+        menuToDisplay = "home";
+    }
+
+    public static void monthPrevious() {
+        System.out.println("""
+                 _________________________________
+                |      Previous Month Report      |
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+
+        ConsoleHelper.promptForString("Press enter to continue.");
+        menuToDisplay = "home";
+    }
+
+    public static void yearToDate() {
+        System.out.println("""
+                 _________________________________
+                |            YTD Report           |
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+
+        ConsoleHelper.promptForString("Press enter to continue.");
+        menuToDisplay = "home";
+    }
+
+    public static void yearPrevious() {
+        System.out.println("""
+                 _________________________________
+                |      Previous Year Report       |
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+
+        ConsoleHelper.promptForString("Press enter to continue.");
+        menuToDisplay = "home";
+    }
+
+    public static void vendor() {
+        System.out.println("""
+                 _________________________________
+                |          Vendor Search          |
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+
+        ConsoleHelper.promptForString("Press enter to continue.");
+        menuToDisplay = "home";
+    }
 
 
-
+    // handles switching around the next menu the user will see
     public static void displayMenu(String menuToDisplay) {
+
         ConsoleHelper.consoleClear();
+
         switch (menuToDisplay) {
             case "home":
                 home();
@@ -113,8 +165,8 @@ public class Menu {
             case "deposit":
                 deposit();
                 break;
-            case "withdrawal":
-                withdrawal();
+            case "payment":
+                payment();
                 break;
             case "reports":
                 reports();
@@ -136,7 +188,7 @@ public class Menu {
                 break;
         }
 
-    }
+    } // closes displayMenu
 
 
 

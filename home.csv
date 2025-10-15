@@ -1,6 +1,0 @@
-Choose an option:
---------------------
-option|d|d ---------- Deposit|deposit.csv
-option|w|w --------- Withdraw|withdraw.csv
-option|l|l ----------- Ledger|ledger.csv
-option|q|q ------------- Quit|quit
