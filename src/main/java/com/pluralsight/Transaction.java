@@ -6,27 +6,15 @@ public class Transaction {
 
     private String date;
     private String time;
-    //private final LocalTime time;
-
     private String note;
     private String agent;
     private float amount;
+
 
     //displays the transaction line as text
     public String display() {
         return (this.getDate() + "|" + this.getTime() + "|" + this.getNote() + "|" + this.getAgent() + "|" + this.getAmount());
     }
-
-
-    /*
-    @Override
-    public String toString() {
-
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss");
-
-        return time.format(timeFormatter);
-    }
-    */
 
     public Transaction(String date, String time, String note, String agent, float amount) {
 

@@ -2,13 +2,13 @@ package com.pluralsight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Menu {
 
     private static final ArrayList<Transaction> transactionsArrayList = new ArrayList<Transaction>();
     public static String menuToDisplay = "home";
+
 
     // loads the transactions array list with all the transactions from the csv
     public static void initTransactions() {
@@ -32,6 +32,7 @@ public class Menu {
 
 
     }
+
 
     // screens
 
@@ -179,6 +180,17 @@ public class Menu {
                  _________________________________
                 |            MTD Report           |
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+
+        try {
+            for(Transaction t : transactionsArrayList) {
+
+                System.out.println(t.display());
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
+            menuToDisplay = "reports";
+        }
 
         ConsoleHelper.promptForString("Press enter to continue.");
         menuToDisplay = "home";
