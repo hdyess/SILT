@@ -269,7 +269,7 @@ public class Menu {
         }
 
         ConsoleHelper.promptForString("\nPress enter to continue.");
-        menuToDisplay = "home";
+        menuToDisplay = "reports";
     }
 
     public static void yearPrevious() {
@@ -295,7 +295,7 @@ public class Menu {
         }
 
         ConsoleHelper.promptForString("\nPress enter to continue.");
-        menuToDisplay = "home";
+        menuToDisplay = "reports";
     }
 
     public static void vendor() {
@@ -305,8 +305,21 @@ public class Menu {
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 """);
 
+        try {
+            System.out.println("Note: this search is case insensitive, and will include deposits.");
+            String vendorSearchIn = ConsoleHelper.promptForString("Type your search:");
+            for (Transaction t : transactionsArrayList) {
+                if (t.getAgent().toLowerCase().contains(vendorSearchIn.toLowerCase())) {
+                    System.out.println(t.display());
+                }
+            }
+
+        } catch (Exception ex) {
+            System.out.println("There was an issue processing your search. Double check your CSV file.");
+        }
+
         ConsoleHelper.promptForString("\nPress enter to continue.");
-        menuToDisplay = "home";
+        menuToDisplay = "reports";
     }
 
     public static void depositsReport() {
