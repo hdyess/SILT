@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class Menu {
@@ -162,18 +163,13 @@ public class Menu {
 
         try {
             for(Transaction t : transactionsArrayList) {
-                System.out.println(t);
-
+                System.out.println(t.display());
             }
-
         } catch (Exception ex) {
             System.out.println(ex);
             System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
             menuToDisplay = "reports";
         }
-
-
-
         ConsoleHelper.promptForString("Press enter to continue.");
         menuToDisplay = "reports";
     }

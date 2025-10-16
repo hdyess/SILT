@@ -12,6 +12,12 @@ public class Transaction {
     private String agent;
     private float amount;
 
+    //displays the transaction line as text
+    public String display() {
+        return (this.getDate() + "|" + this.getTime() + "|" + this.getNote() + "|" + this.getAgent() + "|" + this.getAmount());
+    }
+
+
     /*
     @Override
     public String toString() {
