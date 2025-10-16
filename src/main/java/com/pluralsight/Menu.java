@@ -35,6 +35,9 @@ public class Menu {
     }
 
 
+    //todo: im pretty sure the error handling for ALL of these does not actually wait for the user to
+    //press enter before returning to the previous menu
+
     // screens
     public static void home() {
         System.out.println("""
@@ -66,7 +69,7 @@ public class Menu {
         }
     }
 
-    //todo: make deposits and payments trim spaces off ends
+    //todo: make deposits and payments trim trailing spaces
     public static void deposit() {
         System.out.println("""
                  _________________________________
@@ -211,13 +214,14 @@ public class Menu {
         }
 
         ConsoleHelper.promptForString("\nPress enter to continue.");
-        menuToDisplay = "home";
+        menuToDisplay = "reports";
     }
 
     //todo: lowk important, im like 90% sure prev month and year reports don't include the first and last days
+    //kinda really bad but shouldn't matter for the presentation
 
     //todo: less important, lastMonthFirst and lastMonthLast as well as their year counterparts can be
-    //initialized more efficiently
+    //declared much more cleanly
 
     public static void monthPrevious() {
         System.out.println("""
@@ -242,7 +246,7 @@ public class Menu {
         }
 
         ConsoleHelper.promptForString("\nPress enter to continue.");
-        menuToDisplay = "home";
+        menuToDisplay = "reports";
     }
 
     public static void yearToDate() {
