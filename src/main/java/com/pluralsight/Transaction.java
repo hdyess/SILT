@@ -1,10 +1,14 @@
 package com.pluralsight;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Timer;
 
 public class Transaction {
 
-    private String date;
+    //private String date;
+    private LocalDate date;
     private String time;
     private String note;
     private String agent;
@@ -16,7 +20,7 @@ public class Transaction {
         return (this.getDate() + "|" + this.getTime() + "|" + this.getNote() + "|" + this.getAgent() + "|" + this.getAmount());
     }
 
-    public Transaction(String date, String time, String note, String agent, float amount) {
+    public Transaction(LocalDate date, String time, String note, String agent, float amount) {
 
         this.date = date;
         this.time = time;
@@ -26,11 +30,11 @@ public class Transaction {
 
     }
 
-    public String getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -65,4 +69,5 @@ public class Transaction {
     public void setAmount(float amount) {
         this.amount = amount;
     }
-}
+
+} // closes transaction class

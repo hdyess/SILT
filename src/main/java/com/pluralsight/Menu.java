@@ -2,6 +2,7 @@ package com.pluralsight;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Menu {
@@ -22,7 +23,7 @@ public class Menu {
             String csvLine;
             while ((csvLine = buffReader.readLine()) != null) {
                 String csvLineArray[] = csvLine.split("\\|");
-                transactionsArrayList.add(new Transaction(csvLineArray[0], csvLineArray[1], csvLineArray[2], csvLineArray[3], Float.parseFloat(csvLineArray[4])));
+                transactionsArrayList.add(new Transaction(LocalDate.parse(csvLineArray[0]), csvLineArray[1], csvLineArray[2], csvLineArray[3], Float.parseFloat(csvLineArray[4])));
 
             }
 
@@ -35,7 +36,6 @@ public class Menu {
 
 
     // screens
-
     public static void home() {
         System.out.println("""
                  _________________________________
@@ -66,6 +66,7 @@ public class Menu {
         }
     }
 
+    //todo: make deposits and payments trim spaces off ends
     public static void deposit() {
         System.out.println("""
                  _________________________________
@@ -170,7 +171,6 @@ public class Menu {
 
 
     // screens under reporting menu
-
     public static void allReports() {
         System.out.println("""
                  _________________________________
@@ -200,8 +200,9 @@ public class Menu {
 
         try {
             for(Transaction t : transactionsArrayList) {
-
-                System.out.println(t.display());
+                if (t.getDate().isAfter(LocalDate.now().minusMonths(1))) {
+                    System.out.println(t.display());
+                }
             }
         } catch (Exception ex) {
             System.out.println(ex);
@@ -213,12 +214,32 @@ public class Menu {
         menuToDisplay = "home";
     }
 
+    //todo: lowk important, im like 90% sure prev month and year reports don't include the first and last days
+
+    //todo: less important, lastMonthFirst and lastMonthLast as well as their year counterparts can be
+    //initialized more efficiently
+
     public static void monthPrevious() {
         System.out.println("""
                  _________________________________
                 |      Previous Month Report      |
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 """);
+
+        try {
+            LocalDate lastMonthFirst = LocalDate.now().minusMonths(1).withDayOfMonth(1);
+            LocalDate lastMonthLast = LocalDate.now().minusMonths(1).withDayOfMonth(lastMonthFirst.lengthOfMonth());
+
+            for(Transaction t : transactionsArrayList) {
+                if (t.getDate().isAfter(lastMonthFirst) && t.getDate().isBefore(lastMonthLast)) {
+                    System.out.println(t.display());
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
+            menuToDisplay = "reports";
+        }
 
         ConsoleHelper.promptForString("\nPress enter to continue.");
         menuToDisplay = "home";
@@ -231,6 +252,18 @@ public class Menu {
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 """);
 
+        try {
+            for(Transaction t : transactionsArrayList) {
+                if (t.getDate().isAfter(LocalDate.now().minusYears(1))) {
+                    System.out.println(t.display());
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
+            menuToDisplay = "reports";
+        }
+
         ConsoleHelper.promptForString("\nPress enter to continue.");
         menuToDisplay = "home";
     }
@@ -241,6 +274,21 @@ public class Menu {
                 |      Previous Year Report       |
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 """);
+
+        try {
+            LocalDate lastYearFirst = LocalDate.now().minusYears(1).withDayOfYear(1);
+            LocalDate lastYearLast = LocalDate.now().minusYears(1).withDayOfYear(lastYearFirst.lengthOfYear());
+
+            for(Transaction t : transactionsArrayList) {
+                if (t.getDate().isAfter(lastYearFirst) && t.getDate().isBefore(lastYearLast)) {
+                    System.out.println(t.display());
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
+            menuToDisplay = "reports";
+        }
 
         ConsoleHelper.promptForString("\nPress enter to continue.");
         menuToDisplay = "home";
@@ -348,6 +396,6 @@ public class Menu {
                 break;
         }
 
-    } // closes displayMenu
+    }
 
 }// closes Menu class
