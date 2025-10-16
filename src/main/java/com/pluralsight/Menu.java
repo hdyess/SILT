@@ -12,6 +12,7 @@ public class Menu {
     // loads the transactions array list with all the transactions from the csv
     public static void initTransactions() {
 
+        transactionsArrayList.clear();
 
         try {
             FileReader fileReader = new FileReader("reports.csv");
@@ -86,6 +87,7 @@ public class Menu {
     }
 
     public static void payment() {
+
         System.out.println("""
                  _________________________________
                 |             Payments            |
@@ -109,6 +111,8 @@ public class Menu {
     }
 
     public static void reports() {
+
+        initTransactions();
 
         System.out.println("""
                  _________________________________
@@ -171,7 +175,7 @@ public class Menu {
 
 
         ConsoleHelper.promptForString("Press enter to continue.");
-        menuToDisplay = "home";
+        menuToDisplay = "reports";
     }
 
     public static void monthToDate() {
@@ -269,4 +273,3 @@ public class Menu {
     } // closes displayMenu
 
 }// closes Menu class
-

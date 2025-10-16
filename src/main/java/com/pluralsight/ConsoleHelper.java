@@ -3,6 +3,7 @@ package com.pluralsight;
 import java.io.FileWriter;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import static java.awt.Color.PINK;
@@ -47,7 +48,9 @@ public class ConsoleHelper {
 
             FileWriter fileWriter = new FileWriter("reports.csv", true);
 
-            fileWriter.write(("\n" + LocalDate.now() + "|" + LocalTime.now() + "|" + note + "|" + agent + "|" + amount));
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm:ss");
+
+            fileWriter.write(("\n" + LocalDate.now() + "|" + LocalTime.now().format(timeFormat) + "|" + note + "|" + agent + "|" + amount));
 
             fileWriter.close();
 
