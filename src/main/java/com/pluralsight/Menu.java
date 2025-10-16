@@ -46,7 +46,8 @@ public class Menu {
                 | P --------------------- Payment |
                 | R --------------------- Reports |
                 | Q ------------------------ Quit |
-                |_________________________________|""");
+                |_________________________________|
+               """);
 
 
         switch (ConsoleHelper.promptForString("What would you like to do?").toLowerCase()) {
@@ -69,7 +70,8 @@ public class Menu {
         System.out.println("""
                  _________________________________
                 |             Deposits            |
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
 
         try {
             String depositNote = ConsoleHelper.promptForString("Add a note to your deposit:");
@@ -78,7 +80,7 @@ public class Menu {
 
 
             ConsoleHelper.csvReportWrite(depositNote, depositSender, depositAmount);
-            ConsoleHelper.promptForString("Your deposit has been recorded, press enter to continue");
+            ConsoleHelper.promptForString("\nYour deposit has been recorded, press enter to continue");
             menuToDisplay = "home";
 
         } catch (Exception ex) {
@@ -93,7 +95,8 @@ public class Menu {
         System.out.println("""
                  _________________________________
                 |             Payments            |
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
 
         try {
             String paymentNote = ConsoleHelper.promptForString("Add a note to your payment:");
@@ -101,7 +104,7 @@ public class Menu {
             String paymentAmount = ("-" + ConsoleHelper.promptForString("Payment amount:"));
 
             ConsoleHelper.csvReportWrite(paymentNote, paymentSender, paymentAmount);
-            ConsoleHelper.promptForString("Your payment has been recorded, press enter to continue");
+            ConsoleHelper.promptForString("\nYour payment has been recorded, press enter to continue");
             menuToDisplay = "home";
 
         } catch (Exception ex) {
@@ -120,14 +123,20 @@ public class Menu {
                  _________________________________
                 |            Reporting            |
                 |                                 |
+                | Display:                        |
                 | A ----------------- All Reports |
+                | P -------------------- Payments |
+                | D -------------------- Deposits |
+                |                                 |
+                | Narrow by:                      |
                 | M --------------- Month to Date |
                 | PM ------------- Previous Month |
                 | Y ---------------- Year to Date |
                 | PY -------------- Previous Year |
                 | V ------------ Search by Vendor |
                 | Q ---------------------- Return |
-                |_________________________________|""");
+                |_________________________________|
+                """);
         switch (ConsoleHelper.promptForString("What would you like to do?").toLowerCase()) {
             case "a":
                 menuToDisplay = "allReports";
@@ -150,6 +159,12 @@ public class Menu {
             case "q":
                 menuToDisplay = "home";
                 break;
+            case "p":
+                menuToDisplay = "paymentsReport";
+                break;
+            case "d":
+                menuToDisplay = "depositsReport";
+                break;
         }
     }
 
@@ -160,7 +175,8 @@ public class Menu {
         System.out.println("""
                  _________________________________
                 |           All Reports           |
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
 
         try {
             for(Transaction t : transactionsArrayList) {
@@ -171,7 +187,7 @@ public class Menu {
             System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
             menuToDisplay = "reports";
         }
-        ConsoleHelper.promptForString("Press enter to continue.");
+        ConsoleHelper.promptForString("\nPress enter to continue.");
         menuToDisplay = "reports";
     }
 
@@ -179,7 +195,8 @@ public class Menu {
         System.out.println("""
                  _________________________________
                 |            MTD Report           |
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
 
         try {
             for(Transaction t : transactionsArrayList) {
@@ -192,7 +209,7 @@ public class Menu {
             menuToDisplay = "reports";
         }
 
-        ConsoleHelper.promptForString("Press enter to continue.");
+        ConsoleHelper.promptForString("\nPress enter to continue.");
         menuToDisplay = "home";
     }
 
@@ -200,9 +217,10 @@ public class Menu {
         System.out.println("""
                  _________________________________
                 |      Previous Month Report      |
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
 
-        ConsoleHelper.promptForString("Press enter to continue.");
+        ConsoleHelper.promptForString("\nPress enter to continue.");
         menuToDisplay = "home";
     }
 
@@ -210,9 +228,10 @@ public class Menu {
         System.out.println("""
                  _________________________________
                 |            YTD Report           |
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
 
-        ConsoleHelper.promptForString("Press enter to continue.");
+        ConsoleHelper.promptForString("\nPress enter to continue.");
         menuToDisplay = "home";
     }
 
@@ -220,9 +239,10 @@ public class Menu {
         System.out.println("""
                  _________________________________
                 |      Previous Year Report       |
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
 
-        ConsoleHelper.promptForString("Press enter to continue.");
+        ConsoleHelper.promptForString("\nPress enter to continue.");
         menuToDisplay = "home";
     }
 
@@ -230,12 +250,56 @@ public class Menu {
         System.out.println("""
                  _________________________________
                 |          Vendor Search          |
-                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~""");
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
 
-        ConsoleHelper.promptForString("Press enter to continue.");
+        ConsoleHelper.promptForString("\nPress enter to continue.");
         menuToDisplay = "home";
     }
 
+    public static void depositsReport() {
+        System.out.println("""
+                 _________________________________
+                |          All Deposits           |
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
+
+        try {
+            for(Transaction t : transactionsArrayList) {
+                if (t.getAmount() >= 0) {
+                    System.out.println(t.display());
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
+            menuToDisplay = "reports";
+        }
+        ConsoleHelper.promptForString("\nPress enter to continue.");
+        menuToDisplay = "reports";
+    }
+
+    public static void paymentsReport() {
+        System.out.println("""
+                 _________________________________
+                |           All Payments          |
+                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                """);
+
+        try {
+            for(Transaction t : transactionsArrayList) {
+                if (t.getAmount() <= 0) {
+                    System.out.println(t.display());
+                }
+            }
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("There was an issue showing reports, please check your reports file and try again.\nPress enter to return home.");
+            menuToDisplay = "reports";
+        }
+        ConsoleHelper.promptForString("\nPress enter to continue.");
+        menuToDisplay = "reports";
+    }
 
     // handles switching around the next menu the user will see
     public static void displayMenu(String menuToDisplay) {
@@ -272,6 +336,12 @@ public class Menu {
                 break;
             case "allReports":
                 allReports();
+                break;
+            case "depositsReport":
+                depositsReport();
+                break;
+            case "paymentsReport":
+                paymentsReport();
                 break;
             default:
                 home();
