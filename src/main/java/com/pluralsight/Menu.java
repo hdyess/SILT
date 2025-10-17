@@ -40,10 +40,12 @@ public class Menu {
 
     // screens
     public static void home() {
+
         System.out.println("""
                  _________________________________
                 |         Welcome to SILT!        |
-                |   The coolest ledger program    |
+                |  An intelligent ledger program  |
+                |+++++++++++++++++++++++++++++++++|
                 |                                 |
                 | D --------------------- Deposit |
                 | P --------------------- Payment |
@@ -51,7 +53,6 @@ public class Menu {
                 | Q ------------------------ Quit |
                 |_________________________________|
                """);
-
 
         switch (ConsoleHelper.promptForString("What would you like to do?").toLowerCase()) {
             case "d":
@@ -181,6 +182,7 @@ public class Menu {
 
     // screens under reporting menu
     public static void allReports() {
+        initTransactions(); //maybe fix?
         System.out.println("""
                  _________________________________
                 |           All Reports           |

@@ -6,8 +6,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import static java.awt.Color.PINK;
-
 public class ConsoleHelper {
 
     private static Scanner getInput = new Scanner(System.in);
