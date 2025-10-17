@@ -141,6 +141,12 @@ public class Menu {
                 | Q ---------------------- Return |
                 |_________________________________|
                 """);
+        float reportingScreenTotalBalance = 0;
+        for(Transaction t : transactionsArrayList) {
+            reportingScreenTotalBalance += t.getAmount();
+        }
+        System.out.println("Your total balance is: $" + reportingScreenTotalBalance);
+
         switch (ConsoleHelper.promptForString("What would you like to do?").toLowerCase()) {
             case "a":
                 menuToDisplay = "allReports";
