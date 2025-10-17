@@ -35,8 +35,8 @@ public class Menu {
     }
 
 
-    //todo: im pretty sure the error handling for ALL of these does not actually wait for the user to
-    //press enter before returning to the previous menu
+    //todo: im pretty sure the error handling for ALL of these does not actually wait
+    // for user to press enter before returning to the previous menu
 
     // screens
     public static void home() {
@@ -225,11 +225,15 @@ public class Menu {
         menuToDisplay = "reports";
     }
 
-    //todo: lowk important, im like 90% sure prev month and year reports don't include the first and last days
-    //kinda really bad but shouldn't matter for the presentation
+    /*
+    todo: important, 90% sure prev month and year reports don't include the first and last days
+    kinda really bad but shouldn't matter for the presentation, nothing breaks and it ALMOST works
 
-    //todo: less important, lastMonthFirst and lastMonthLast as well as their year counterparts can be
-    //declared much more cleanly
+    todo: less important, lastMonthFirst and lastMonthLast as well as their year
+    counterparts can be declared more cleanly
+    i mean it runs fine in the terminal, and they're only called a single time when the page is
+    loaded, so i guess it doesn't matter?
+    */
 
     public static void monthPrevious() {
         System.out.println("""
@@ -313,9 +317,13 @@ public class Menu {
                  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
                 """);
 
+        initTransactions();
+
         try {
             System.out.println("Note: this search is case insensitive, and will include deposits.");
             String vendorSearchIn = ConsoleHelper.promptForString("Type your search:");
+            System.out.println("");
+
             for (Transaction t : transactionsArrayList) {
                 if (t.getAgent().toLowerCase().contains(vendorSearchIn.toLowerCase())) {
                     System.out.println(t.display());
