@@ -27,3 +27,9 @@ The vendor search screen, where users can search transactions by vendor (or othe
 
 
 The application will likely work on any CL that's capable of running a JVM, but will look best and feel smoothest if ANSI escape codes are supported. 
+These codes consist of bytes of text that, when printed to the console, are interpreted as commands. In this case, I use them to clear the screen between each menu display extremely simply. 
+
+My most used sources of information were:
+https://docs.oracle.com/
+https://www.w3schools.com/java/
+https://www.geeksforgeeks.org/java/
